@@ -1,0 +1,20 @@
+# Fichiers de compilation / exécution
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Fichiers d'environnement virtuel
+venv/
+env/
+
+# Répertoires de distribution / construction
+build/
+dist/
+
+
+# Dépendances / modules installés
+/.idea/
+/.vscode/
+
+*.nc
