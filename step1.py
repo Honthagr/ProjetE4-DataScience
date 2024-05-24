@@ -5,7 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from assets.fig_layout import my_figlayout, my_linelayout
 
-dash.register_page(__name__, name='1-Data processing', title='Data Science | Data processing')
+dash.register_page(__name__, name='1-Data pre-processing', title='Data Science | Data pre-processing')
 
 _clean_solar_energy_train_ = pd.read_csv('data/clean_solar_energy_train.csv', usecols=[1, 6], names=['added_time', 'Solar_MW'], skiprows=1)
 _clean_solar_energy_train_["Time"] = _clean_solar_energy_train_["added_time"]
@@ -19,7 +19,7 @@ _clean_solar_energy_test_["Solar_MW"] = _clean_solar_energy_test_["Solar_MW"]
 layout = dbc.Container([
     # Title
     dbc.Row([
-        dbc.Col([html.H3('Our datasets')], width=12, className='row-titles')
+        dbc.Col([html.H3('Data pre-processing')], width=12, className='row-titles')
     ]),
 
     # Dataset selection

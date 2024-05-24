@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from itertools import product
 
-dash.register_page(__name__, name='3-Predictions', title='Data Science | Predictions')
+dash.register_page(__name__, name='3-ML & DL predictions', title='Data Science | Machine Learning & Deep Learning predictions')
 
 from assets.sarima_gridsearch import sarima_grid_search
 
@@ -19,8 +19,7 @@ layout = dbc.Container([
     # title
     dbc.Row([
         dbc.Col([
-            html.H3(['Hyperparameter Tuning']),
-            html.P([html.B(['SARIMA(p,d,q; P,D,Q,m) grid search'])], className='par')
+            html.H3(['Machine Learning & Deep Learning predictions'])
         ], width=12, className='row-titles')
     ]),
     # train-test split

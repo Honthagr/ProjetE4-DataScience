@@ -20,17 +20,17 @@ layout = dbc.Container([
                 html.B('Our project is divided into different stages:')
             ], className='guide'),
             html.P([
-                html.B('1) Data processing'),
+                html.B('1) Data pre-processing'),
                 html.Br(),
-                'To begin with, we filled in the gaps in our dataset. We then normalized our data. Finally, we retained only the most relevant features.'
+                'As a first step, we filled in the gaps in our dataset to produce consistent training and test datasets.'
             ], className='guide'),
             html.P([
-                html.B('2) Machine Learning & Deep Learning'),
+                html.B('2) Feature engineering and Data processing'),
                 html.Br(),
-                'After processing our dataset, we selected a few algorithms that were consistent with it.'
+                'After pre-processing our dataset, we focused on feature engineering and data processing.'
             ], className='guide'),
             html.P([
-                html.B('3) Predictions'),
+                html.B('3) Machine Learning & Deep Learning predictions'),
                 html.Br(),
                 'Then, we checked if these were reliable weather data prediction models.'
             ], className='guide'),
