@@ -37,7 +37,12 @@ layout = dbc.Container([
             html.P([
                 html.B('4) Performances'),
                 html.Br(),
-                'Finally, in order to display our results, we created a dashboard in Python language, making it easy to understand the performance of the trained models.'
+                'Finally, in order to display our results, we chose some metrics to understand the performance of the trained models.'
+            ], className='guide'),
+            html.P([
+                html.B('5) Conclusion'),
+                html.Br(),
+                'To conclude, we analized our results to identify the best model.'
             ], className='guide')
         ], width=8),
         dbc.Col([], width=2)

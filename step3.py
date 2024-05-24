@@ -9,8 +9,9 @@ dash.register_page(__name__, name='3-Predictions', title='Data Science | Predict
 
 from assets.sarima_gridsearch import sarima_grid_search
 
-_data_energy_avg_ = pd.read_csv('data/energy_avg_.csv', usecols=[2, 8], names=['valid_datetime', 'GSolar_MW'], skiprows=1)
-_data_energy_avg_['Time'] = pd.to_datetime(_data_energy_avg_['valid_datetime'], errors='raise')
+_clean_solar_energy_train_ = pd.read_csv('data/clean_solar_energy_train.csv', usecols=[1, 6], names=['added_time', 'Solar_MW'], skiprows=1)
+_clean_solar_energy_train_["Time"] = _clean_solar_energy_train_["added_time"]
+_clean_solar_energy_train_["Solar_MW"] = _clean_solar_energy_train_["Solar_MW"]
 
 ### PAGE LAYOUT ###############################################################################################################
 
@@ -138,11 +139,11 @@ layout = dbc.Container([
     Input(component_id='train-slider', component_property='value')
 )
 def dropdown_opt_from(_trainp):
-    _data = _data_energy_avg_.copy()
+    _data = _clean_solar_energy_train_.copy()
     if _trainp:
-        idx_split = round(len(_data['GSolar_MW']) * int(_trainp)/100) # Split train-test
+        idx_split = round(len(_data['Solar_MW']) * int(_trainp)/100) # Split train-test
         _data = _data.iloc[:idx_split+1]
-    _opts = range(0,int(len(_data['GSolar_MW'])/2),1)
+    _opts = range(0,int(len(_data['Solar_MW'])/2),1)
     _opts = list(_opts)
     return _opts, _opts, _opts, _opts, _opts, _opts, _opts
 
@@ -151,10 +152,10 @@ def dropdown_opt_from(_trainp):
     Input(component_id='p-from', component_property='value')
 )
 def dropdown_opt_to(_from):
-    _data = _data_energy_avg_.copy()
+    _data = _clean_solar_energy_train_.copy()
     if not _from:
         _from = 0
-    _opts = range(int(_from),int(len(_data['GSolar_MW'])/2),1)
+    _opts = range(int(_from),int(len(_data['G=Solar_MW'])/2),1)
     return list(_opts)
 
 @callback(
@@ -162,10 +163,10 @@ def dropdown_opt_to(_from):
     Input(component_id='d-from', component_property='value')
 )
 def dropdown_opt_to(_from):
-    _data = _data_energy_avg_.copy()
+    _data = _clean_solar_energy_train_.copy()
     if not _from:
         _from = 0
-    _opts = range(int(_from),int(len(_data['GSolar_MW'])/2),1)
+    _opts = range(int(_from),int(len(_data['Solar_MW'])/2),1)
     return list(_opts)
 
 @callback(
@@ -173,10 +174,10 @@ def dropdown_opt_to(_from):
     Input(component_id='q-from', component_property='value')
 )
 def dropdown_opt_to(_from):
-    _data = _data_energy_avg_.copy()
+    _data = _clean_solar_energy_train_.copy()
     if not _from:
         _from = 0
-    _opts = range(int(_from),int(len(_data['GSolar_MW'])/2),1)
+    _opts = range(int(_from),int(len(_data['Solar_MW'])/2),1)
     return list(_opts)
 
 @callback(
@@ -184,7 +185,7 @@ def dropdown_opt_to(_from):
     Input(component_id='sp-from', component_property='value')
 )
 def dropdown_opt_to(_from):
-    _data = _data_energy_avg_.copy()
+    _data = _clean_solar_energy_train_.copy()
     if not _from:
         _from = 0
     _opts = range(int(_from),int(len(_data['GSolar_MW'])/2),1)
@@ -195,10 +196,10 @@ def dropdown_opt_to(_from):
     Input(component_id='sd-from', component_property='value')
 )
 def dropdown_opt_to(_from):
-    _data = _data_energy_avg_.copy()
+    _data = _clean_solar_energy_train_.copy()
     if not _from:
         _from = 0
-    _opts = range(int(_from),int(len(_data['GSolar_MW'])/2),1)
+    _opts = range(int(_from),int(len(_data['Solar_MW'])/2),1)
     return list(_opts)
 
 @callback(
@@ -206,10 +207,10 @@ def dropdown_opt_to(_from):
     Input(component_id='sq-from', component_property='value')
 )
 def dropdown_opt_to(_from):
-    _data = _data_energy_avg_.copy()
+    _data = _clean_solar_energy_train_.copy()
     if not _from:
         _from = 0
-    _opts = range(int(_from),int(len(_data['GSolar_MW'])/2),1)
+    _opts = range(int(_from),int(len(_data['Solar_MW'])/2),1)
     return list(_opts)
 
 @callback(
@@ -217,10 +218,10 @@ def dropdown_opt_to(_from):
     Input(component_id='sm-from', component_property='value')
 )
 def dropdown_opt_to(_from):
-    _data = _data_energy_avg_.copy()
+    _data = _clean_solar_energy_train_.copy()
     if not _from:
         _from = 0
-    _opts = range(int(_from),int(len(_data['GSolar_MW'])/2),1)
+    _opts = range(int(_from),int(len(_data['Solar_MW'])/2),1)
     return list(_opts)
 
 # Grid Search & Show combinations
@@ -260,9 +261,9 @@ def grid_search_results(_trainp, _nclicks, p_from,p_to,d_from,d_to,q_from,q_to,s
     # Split data
     _datatrain = None; _datatest = None
     if _trainp:
-        _data = _data_energy_avg_.copy()
-        _data['GSolar_MW'] = list(np.log(_data['GSolar_MW']))
-        idx_split = round(len(_data['GSolar_MW']) * int(_trainp)/100) # Split train-test
+        _data = _clean_solar_energy_train_.copy()
+        _data['Solar_MW'] = list(np.log(_data['Solar_MW']))
+        idx_split = round(len(_data['Solar_MW']) * int(_trainp)/100) # Split train-test
         _datatrain = _data.iloc[:idx_split+1]
         _datatest = _data.iloc[idx_split+1:]
     # Grid search
